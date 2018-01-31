@@ -1,0 +1,84 @@
+<style type="text/css">
+	.messages {
+			text-align: left;
+			border:solid black 1px;
+			padding:5px;
+			width: 200px;
+			height: 250px;
+			overflow: scroll;
+
+		}
+
+	.left, .right, .riders {
+		display: inline-block;
+		vertical-align: top;
+		margin: 30px;
+	}
+
+	textarea {
+		width: 206px;
+		border-collapse: collapse;
+	}
+</style>
+
+<div class="left">
+	<h2><%= @comp.name %></h2>
+	<p>Competition Creator: <%= @comp.user.first_name %> <%= @comp.user.last_name %></p>
+	<p>Email: <%= @comp.user.email %></p>
+	<p>Date: <%= @comp.date.strftime("%b %d, %Y") %></p>
+	<p>Location: <%= @comp.city %>, <%= @comp.state %></p>
+	<p>Competition level: <%= @comp.skill %></p>
+	<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<table>
+<tr><td><input type="hidden" name="on0" value="Entry Fee">Entry Fee</td></tr><tr><td><select name="os0">
+	<option value="Beginner Fee">Beginner Fee $20.00 USD</option>
+	<option value="Intermediate Fee">Intermediate Fee $30.00 USD</option>
+	<option value="Advanced Fee">Advanced Fee $40.00 USD</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIIOQYJKoZIhvcNAQcEoIIIKjCCCCYCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYBiCa8EHcvKq/uuDmJKx7BuIMnFqPm9Qpsw3tzhNEhEBK7terxSYHkgPDlOSzgfroKA5qoWlu4UGryow47dvOsZHKA07N9xwPOJggdC/MdBtlOdyLpg3iR7alZl9ejwiBQy9+Q0a7e43TA4Q5XmaHJzJS5lLihZoA3HFi3vo/0b/jELMAkGBSsOAwIaBQAwggG1BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECAnCqqRPZw4PgIIBkHEqbrdFv5Z0LZKMOUakNMxNKuUVku3jtHzeNVBlvvnY1BeJJqE3UT9RQ6w/xRV8JHUMWDKY2HUrUueyv4FMZL+YeVWQLZ0iiHlgRMa1tlONnm10GowSH7CtEsgTKO9vzXHiCByj7rLmSS++Scd+cBEyOVRYlYdmR6Hk//Pb219+Oli3lq97vluGBT2mkkCt/LWQR4lJEJA8fJQ0gWO0dPF7aB2wNcgqeOBWJ5fXkAzZ7Xg/WSepqh5tXSsx52O8raxgms/AGr1vZgS01DmqSTd6jx/Ula8tBzSQMm4uQlcRvXYY/2AMOGi/iO5khdoXefNCZknvGg4m9TNI8M8dPUWejXXnJvplHj2dThA5nCWCN3NgnWo3PRqZEglBppIc4XpxUamaJ6R21uHDssktSyB1v8CRbX/R506uIJBfjs0KX6brAKV5hHtlVZ2Cpy0khFlS9IyI7R120IETMYiziqMwbSEDIP4Dl685s45VGGdv10jzLLKJppjSurK53dcUaaNnjsz739+lGICXMr+W2Y+gggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNzEwMjYxNTA1NDFaMCMGCSqGSIb3DQEJBDEWBBQElUzvwcaPaix5xjt4/LIug18gOzANBgkqhkiG9w0BAQEFAASBgLytsySfw+JgdGO159BF0/l6RHjD8pNO9Ih/rUCnI+KHteSUxBIcs6mC2RFNcAx6d0elopCu364uTq6FClSG1VrnBqnpwZLN/v0fmj48BFEhO1NkGe4ZhrMpMkxVze2CwDf6jc7RS/hHAX1IjAP9fWUHtH1mVQmoEW89qm98NBOx-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</p>
+<p><small>*No refunds if you choose to backout of competition</small></p>
+</div>
+
+<div class="riders">
+	<h2>Riders in this Competition</h2>
+	<table>
+	<tr>
+		<th>Name</th>
+		<th>Location</th>
+		<th>Skill Level</th>
+	</tr>
+	<% @comp.competidors.each do |person| %>
+	<tr>
+		<td><%= person.first_name %> <%= person.last_name %></td>
+		<td><%= person.city %>, <%= person.state %></td>
+		<td><%= person.skill %></td>
+	</tr>
+	<% end %>
+</table>
+</div>
+
+<div class="right">
+	<div class="messages">
+		<% @comp.messages.each do |message| %>
+			<p><small><%= message.user.first_name %>: <%= message.content %></small></p>
+			<hr>
+		<% end %>
+	</div>
+	<form action="/messages" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <input type="hidden" name="message[competition_id]" value="<%= @comp.id %>">
+
+        <textarea name="message[content]"></textarea>
+
+        <p><button type="submit">Send Message</button></p>
+    </form>
+</div>

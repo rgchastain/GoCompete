@@ -1,0 +1,33 @@
+<h2>Edit Your Profile</h2>
+
+<form action="/users/<%= @user.id %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<input type="hidden" name="_method" value="patch">
+	<p>First Name:<input type="text" name="user[first_name]" value="<%= @user.first_name %>"></p>
+
+	<p>Last Name: <input type="text" name="user[last_name]" value="<%= @user.last_name %>"></p>
+
+	<p>Email: <input type="text" name="user[email]" value="<%= @user.email %>"></p>
+
+	<p>Skill Level: <select name="user[skill]">
+				<option value="<%=current_user.skill%>"><%=current_user.skill%></option>
+				<% @skill.each do |skill| %>
+					<option value="<%=skill%>">
+						<%=skill%>
+					</option>
+				<% end %>
+			</select></p>
+
+	<p>
+		Location: <input type="text" name="user[city]" value="<%= @user.city %>">
+
+		<select name="user[state]">
+			<option value="<%=current_user.state%>"><%=current_user.state%></option>
+			<% @states.each do |state| %>
+			<option value="<%=state%>"><%=state%></option>
+			<% end %>
+		</select>
+	</p>
+
+	<p><button type="submit">Update</button></p>
+</form>

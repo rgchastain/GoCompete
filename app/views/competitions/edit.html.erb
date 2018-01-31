@@ -1,0 +1,35 @@
+<h2>Edit Competition</h2>
+
+<form action="/competitions/<%= @comp.id %>" method="post">
+		<input type="hidden" name="authenticity_token" class="<%=form_authenticity_token%>">
+		<input type="hidden" name="_method" value="patch">
+			
+		<p>Name: <input type="text" name="competition[name]" value="<%= @comp.name %>"></p>
+
+		<p>Date: <input type="date" name="competition[date]" value="<%= @comp.date %>"></p>
+
+		<p>Skill Level: <select name="competition[skill]">
+				<option value="<%= @comp.skill%>"><%=@comp.skill%></option>
+				<% @skill.each do |skill| %>
+					<option value="<%=skill%>">
+						<%=skill%>
+					</option>
+				<% end %>
+			</select></p>
+
+		<p>
+		Location: <input type="text" name="competition[city]" value="<%= @comp.city %>">
+
+		<select name="competition[state]">
+			<option value="<%= @comp.state%>"><%=@comp.state%></option>
+			<% @states.each do |state| %>
+				<option value="<%=state%>"><%=state%></option>
+			<% end %>
+		</select>
+		</p>
+
+		<p>Description: <textarea name="competition[desc]" value="<%= @comp.desc %>"><%= @comp.desc %></textarea></p>
+
+		<p><button type="submit">Update Competition</button></p>
+
+		</form>

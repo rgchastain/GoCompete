@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snowboard Competition</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+<% if current_user %>
+	<a href="<%= logout_path %>" data-method="delete">Logout</a>
+	<a href="<%= competitions_path %>">Home</a>
+<% end %>
+<%= Time.now.strftime("%b %d, %Y") %> <%= Time.now.strftime("%I:%M %p") %>
+
+
+<% if flash[:errors] %>
+  	<% flash[:errors].each do |e| %>
+    	<p class="text-danger"><%= e %></p>
+  	<% end %>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

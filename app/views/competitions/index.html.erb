@@ -1,0 +1,220 @@
+<style type="text/css">
+	table {
+		background-color: grey;
+		padding: 10px;
+		width: 100%;
+	}
+
+	td, th {
+		padding-left: 10px;
+		padding-right: 10px;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+</style>
+
+
+<h2><% if @user == current_user %>Let's Shred,<% end %> <%= @user.first_name %>!!</h2>
+
+<p><a href="/users/<%= @user.id %>/edit">Edit Profile</a></p>
+
+<p>Competitions you're Hosting:</p>
+
+	<% @user_comps.each do |comp| %>
+	<ul>
+		<li><a href="/competitions/<%= comp.id %>"><%= comp.name %></a></li>
+	</ul>
+	<% end %>
+
+
+<p>Here are some competitions in your state and skill level:</p>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Skill Level</th>
+		<th>Description</th>
+		<th>Action/Status</th>
+	</tr>
+	<% @user_st_comp.each do |comp| %>
+	<tr>
+		<td><a href="/competitions/<%= comp.id %>"><%= comp.name %></a></td>
+		<td><%= comp.date.strftime("%b %d, %Y") %></td>
+		<td><%= comp.city %></td>
+		<td><%= comp.skill %></td>
+		<td><%= comp.desc %></td>
+		<td>
+			<% if comp.user == current_user %>
+	        	<a href="/competitions/<%= comp.id %>/edit">Edit</a>
+	        <% else %>
+	        	<% if comp.competidors.include? current_user %>
+	        			<form action="/competitions/<%= comp.id %>/cancel" method="post">
+	                		<input type="hidden" name="_method" value="delete" />
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	            			<button  type="submit" value="Cancel">Cancel</button> Payed
+	            		</form>
+	            	<% else %>
+	            		<form action="/competitions/<%= comp.id %>/pay" method="post">
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	                		<button type="submit" value="Pay">Pay</button>
+	            		</form>
+	            	<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<p>Here are some competitions out of your state and in your skill level:</p>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Skill Level</th>
+		<th>Description</th>
+		<th>Action/Status</th>
+	</tr>
+	<% @user_skill.each do |comp| %>
+	<tr>
+		<td><a href="/competitions/<%= comp.id %>"><%= comp.name %></a></td>
+		<td><%= comp.date.strftime("%b %d, %Y") %></td>
+		<td><%= comp.city %></td>
+		<td><%= comp.skill %></td>
+		<td><%= comp.desc %></td>
+		<td>
+			<% if comp.user == current_user %>
+	        	<a href="/competitions/<%= comp.id %>/edit">Edit</a>
+	        <% else %>
+	        	<% if comp.competidors.include? current_user %>
+	        			<form action="/competitions/<%= comp.id %>/cancel" method="post">
+	                		<input type="hidden" name="_method" value="delete" />
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	            			<button  type="submit" value="Cancel">Cancel</button> Payed
+	            		</form>
+	            	<% else %>
+	            		<form action="/competitions/<%= comp.id %>/pay" method="post">
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	                		<button type="submit" value="Pay">Pay</button>
+	            		</form>
+	            	<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<p>Here are some competitions in your state but out of your skill level:</p>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Skill Level</th>
+		<th>Description</th>
+		<th>Action/Status</th>
+	</tr>
+	<% @user_state.each do |comp| %>
+	<tr>
+		<td><a href="/competitions/<%= comp.id %>"><%= comp.name %></a></td>
+		<td><%= comp.date.strftime("%b %d, %Y") %></td>
+		<td><%= comp.city %></td>
+		<td><%= comp.skill %></td>
+		<td><%= comp.desc %></td>
+		<td>
+			<% if comp.user == current_user %>
+	        	<a href="/competitions/<%= comp.id %>/edit">Edit</a>
+	        <% else %>
+	        	<% if comp.competidors.include? current_user %>
+	        			<form action="/competitions/<%= comp.id %>/cancel" method="post">
+	                		<input type="hidden" name="_method" value="delete" />
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	            			<button  type="submit" value="Cancel">Cancel</button> Payed
+	            		</form>
+	            	<% else %>
+	            		<form action="/competitions/<%= comp.id %>/pay" method="post">
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	                		<button type="submit" value="Pay">Pay</button>
+	            		</form>
+	            	<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<p>All Competitions:</p>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Skill Level</th>
+		<th>Description</th>
+		<th>Action/Status</th>
+	</tr>
+	<% @other_states.each do |comp| %>
+	<tr>
+		<td><a href="/competitions/<%= comp.id %>"><%= comp.name %></a></td>
+		<td><%= comp.date.strftime("%b %d, %Y") %></td>
+		<td><%= comp.city %></td>
+		<td><%= comp.state %></td>
+		<td><%= comp.skill %></td>
+		<td><%= comp.desc %></td>
+		<td>
+			<% if comp.user == current_user %>
+	        	<a href="/competitions/<%= comp.id %>/edit">Edit</a>
+	        <% else %>
+	        	<% if comp.competidors.include? current_user %>
+	        			<form action="/competitions/<%= comp.id %>/cancel" method="post">
+	                		<input type="hidden" name="_method" value="delete" />
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	            			<button  type="submit" value="Cancel">Cancel</button> Payed
+	            		</form>
+	            	<% else %>
+	            		<form action="/competitions/<%= comp.id %>/pay" method="post">
+	                		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+	                		<button type="submit" value="Pay">Pay</button>
+	            		</form>
+	            	<% end %>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<fieldset style="border: 1px black solid; width: 250px;">
+<legend><h3>Add Competition</h3></legend>
+<form action="/competitions" method="post">
+		<input type="hidden" name="authenticity_token" class="<%=form_authenticity_token%>">
+			
+		<p>Name: <input type="text" name="competition[name]"></p>
+
+		<p>Date: <input type="date" name="competition[date]"></p>
+
+		<p>Skill Level: <select name="competition[skill]">
+				<% @skill.each do |skill| %>
+					<option value="<%=skill%>">
+						<%=skill%>
+					</option>
+				<% end %>
+			</select></p>
+
+		<p>
+		Location: <input type="text" name="competition[city]">
+
+		<select name="competition[state]">
+			<% @states.each do |state| %>
+				<option value="<%=state%>"><%=state%></option>
+			<% end %>
+		</select>
+		</p>
+
+		<p>Description: <textarea name="competition[desc]"></textarea></p>
+
+		<p><button type="submit">Add Competition</button></p>
+
+		</form>
+</fieldset>
